@@ -343,8 +343,7 @@ def test_dirname(path, returned):
     ],
 )
 def test_too_many_requests(status_file, worker, requests_mock):
-    with open(status_file) as fp:
-        mock_response = fp.read()
+    mock_response = Path(status_file).read_text()
     requests_mock.post("//overpass-api.de/api/interpreter", status=429)
     requests_mock.get("//overpass-api.de/api/status", text=mock_response)
 
